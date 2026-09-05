@@ -1,0 +1,13 @@
+period,strategy,metric,baseline,baseline_value,n_seeds,win_rate
+calm_2023_24,DQN,sharpe,static_60_30_10,0.7036035674040041,3,0.0
+calm_2023_24,PPO,sharpe,static_60_30_10,0.7036035674040041,3,0.0
+covid_crash,DQN,sharpe,static_60_30_10,1.5962065199982358,3,0.0
+covid_crash,PPO,sharpe,static_60_30_10,1.5962065199982358,3,0.0
+gfc,DQN,sharpe,static_60_30_10,-0.7716035407884247,3,1.0
+gfc,PPO,sharpe,static_60_30_10,-0.7716035407884247,3,1.0
+inflation_2022,DQN,sharpe,static_60_30_10,-0.8681907286115162,3,0.6666666666666666
+inflation_2022,PPO,sharpe,static_60_30_10,-0.8681907286115162,3,0.3333333333333333
+recovery_2020_21,DQN,sharpe,static_60_30_10,-1.9642848662783596,3,1.0
+recovery_2020_21,PPO,sharpe,static_60_30_10,-1.9642848662783596,3,1.0
+val,DQN,sharpe,static_60_30_10,0.11906079571756298,3,0.3333333333333333
+val,PPO,sharpe,static_60_30_10,0.11906079571756298,3,0.0

@@ -1,0 +1,22 @@
+# Python 3.10-3.12 required (PEP 585 generics are used throughout).
+
+# Core
+numpy>=1.24
+pandas>=2.0
+scipy>=1.10
+PyYAML>=6.0
+
+# RL
+gymnasium>=0.29
+stable-baselines3>=2.3
+torch>=2.0
+
+# Plotting
+matplotlib>=3.7
+
+# Market data (optional: the pipeline falls back to a synthetic generator
+# if this is missing or the network is unavailable)
+yfinance>=0.2.40
+
+# Testing
+pytest>=7.4

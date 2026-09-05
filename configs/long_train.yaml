@@ -1,0 +1,18 @@
+# Alternative split: maximise training data by starting in 2005.
+#
+# TRADE-OFF: this swallows the 2007-2009 crisis, so the 'gfc' stress regime is
+# NO LONGER a holdout. It is removed here rather than left in to be misread.
+# Out-of-sample testing then rests entirely on 2016+ (val, COVID, inflation,
+# recovery, calm), which contains no deflationary crisis.
+#
+#   python scripts/run_experiments.py --config configs/long_train.yaml
+
+splits:
+  train: ["2005-01-01", "2015-12-31"]
+  val:   ["2016-01-01", "2019-12-31"]
+  test_regimes:
+    covid_crash:      ["2020-01-01", "2020-06-30"]
+    recovery_2020_21: ["2020-07-01", "2021-12-31"]
+    inflation_2022:   ["2022-01-01", "2022-12-31"]
+    calm_2023_24:     ["2023-01-01", "2024-12-31"]
+  stress_regime: {}      # deliberately empty: GFC is inside the training window

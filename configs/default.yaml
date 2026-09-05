@@ -1,0 +1,83 @@
+# Default experiment configuration.
+# Every number here is something you should be able to justify in the oral exam.
+
+data:
+  tickers: [SPY, IEF, GLD]        # equity / duration / real-asset sleeve
+  start: "2005-01-01"             # GLD began trading Nov 2004
+  end: "2024-12-31"
+  cache_dir: data
+  synthetic: false                # true -> offline regime-switching generator
+  synthetic_seed: 20260420
+  download_retries: 4          # retry transient yfinance failures ...
+  download_backoff: 2.0        # ... with 1s, 2s, 4s waits between attempts
+
+splits:
+  # Strictly time-ordered. Never shuffle financial time series.
+  # Training starts AFTER the GFC window below, so 'gfc' is a genuine
+  # never-seen crisis. Do not move this back to 2005 without also removing the
+  # gfc stress regime -- otherwise you are evaluating on training data.
+  train: ["2009-07-01", "2015-12-31"]
+  val:   ["2016-01-01", "2019-12-31"]
+  test_regimes:
+    covid_crash:      ["2020-01-01", "2020-06-30"]
+    recovery_2020_21: ["2020-07-01", "2021-12-31"]
+    inflation_2022:   ["2022-01-01", "2022-12-31"]
+    calm_2023_24:     ["2023-01-01", "2024-12-31"]
+  stress_regime:
+    # Sits BEFORE the training window, so the agent has never seen it.
+    gfc: ["2007-07-01", "2009-06-30"]
+
+env:
+  window: 30                      # look-back days in the observation
+  episode_length: 252             # ~1 trading year per training episode
+  transaction_cost_bps: 5.0       # 5 bps per unit of turnover
+  initial_cash: 1.0
+  reward: log_return              # log_return | differential_sharpe | cvar_penalised
+  reward_kwargs: {}
+  grid_steps: 4                   # 3 assets, step 1/4 -> 15 discrete actions
+  max_weight: 1.0
+  allow_cash: false
+  reward_scale: 100.0             # daily log-returns ~1e-3: scale for stable nets
+
+train:
+  algos: [DQN, PPO]
+  seeds: [0, 1, 2, 3, 4]
+  total_timesteps: 150000
+  eval_freq: 5000
+  n_eval_episodes: 3
+  device: cpu                     # small MLPs: CPU is faster than GPU here
+
+  dqn:
+    learning_rate: 0.0005
+    buffer_size: 100000
+    learning_starts: 5000
+    batch_size: 128
+    tau: 1.0                      # hard target updates
+    gamma: 0.99
+    train_freq: 4
+    gradient_steps: 1
+    target_update_interval: 1000
+    exploration_fraction: 0.3
+    exploration_initial_eps: 1.0
+    exploration_final_eps: 0.05
+    policy_kwargs:
+      net_arch: [128, 128]
+
+  ppo:
+    learning_rate: 0.0003
+    n_steps: 1024
+    batch_size: 128
+    n_epochs: 10
+    gamma: 0.99
+    gae_lambda: 0.95
+    clip_range: 0.2
+    ent_coef: 0.005
+    vf_coef: 0.5
+    max_grad_norm: 0.5
+    policy_kwargs:
+      net_arch:
+        pi: [128, 128]
+        vf: [128, 128]
+
+results_dir: results
+figures_dir: results/figures

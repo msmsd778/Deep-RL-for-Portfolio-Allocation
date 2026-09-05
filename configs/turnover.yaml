@@ -1,0 +1,3 @@
+env:
+  reward: turnover_penalised
+  reward_kwargs: {lam: 0.02}
