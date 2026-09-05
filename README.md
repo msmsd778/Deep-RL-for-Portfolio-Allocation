@@ -5,10 +5,6 @@ University of Pisa, MSc Artificial Intelligence and Data Engineering
 
 ---
 
-> **New to finance or RL?** Read `GUIDE.md` first. It explains every concept in
-> this project from zero — portfolios, Sharpe ratios, MDPs, DQN, PPO — with
-> worked numeric examples, plus a section on how to read your own results.
-
 ## 1. What this project is, in one paragraph
 
 Portfolio allocation is a sequential decision problem under uncertainty: every
