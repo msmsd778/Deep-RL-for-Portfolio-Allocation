@@ -77,6 +77,13 @@ target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
+data/
+results/
+results_ablation/
+results_smoke/
+__pycache__/
+*.pyc
+.pytest_cache/
 
 # IPython
 profile_default/
