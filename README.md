@@ -441,23 +441,7 @@ Uppal (2009) *1/N*; Jiang, Xu & Liang (2017) *RL portfolio management*; Rockafel
 
 ---
 
-## 13. Before the presentation
-
-- [ ] Run the full pipeline on **real** data and commit `results/`
-- [ ] Run the reward ablation (three configs)
-- [ ] Run a transaction-cost sensitivity check (5 vs 20 bps)
-- [ ] Create the Overleaf project named
-      `2026_SEAI_project_Lastname1_Lastname2(_Lastname3)`
-- [ ] Share it with `marco.cococcioni@unipi.it` — **at least 3 days before**
-      presentation day (earlier is better: you can get feedback while the work
-      is still in progress)
-- [ ] Make sure **every group member** can explain `env.py` line by line. The
-      stated grading style is "why did you make this choice here?", and the
-      questions land on the environment far more often than on the algorithms.
-
----
-
-## 14. Troubleshooting
+## 13. Troubleshooting
 
 | Symptom | Fix |
 |---|---|
@@ -476,18 +460,3 @@ Uppal (2009) *1/N*; Jiang, Xu & Liang (2017) *RL portfolio management*; Rockafel
 | DQN collapses to one action | Increase `exploration_fraction`, or reduce `grid_steps` — 15 actions on a 543-dim state is already demanding. |
 | `Period too short` | A test window is shorter than `window + 15` days. Widen the date range in the config. |
 | Results differ between runs | Confirm the seed list, and check whether you are on cached vs freshly downloaded prices. `results/config_used.yaml` records exactly what ran. |
-
----
-
-## 15. A note on ownership
-
-This codebase is a starting point, not a submission. The examination is an oral
-defence with the explicit question style *"why did you make this choice here?
-why this loss function and not another? why didn't you regularise?"* — and every
-design decision in here has a defensible answer, but **you have to be the one
-who can give it.**
-
-Concretely, before you present: change something. Add a fourth asset, implement
-an A2C or SAC arm, tune the grid resolution, add a regime-detection feature,
-extend the CVaR reward. Projects that are understood get defended well; projects
-that are merely run do not.
